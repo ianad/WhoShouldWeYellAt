@@ -16,9 +16,10 @@ PRs are welcome for components and layouts such as listed below:
 
 ### Components we need
 
-1. ZIP Code Text Entry
+There's a set of components on the `app/login/page.tsx` page from the template we don't really need that we could repurpose
+1. ZIP Code Text Entry (repurpose from username/password entry field) 
 2. Policy Gripe Text Entry (or dropdown?)
-3. Submit Button I guess. There's an Auth Button component from the template we don't really need that we could repurpose
+3. Submit Button (repurpose from login submit button)
 
 ## Database Schema
 
