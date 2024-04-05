@@ -1,7 +1,8 @@
 # WhoShouldWeYellAt
 
 https://twitter.com/emiliepfrank/status/1775933238592319953
-![[GKVh3bsWoAATqWz.jpeg]]
+
+![alt text](https://pbs.twimg.com/media/GKVh3bsWoAATqWz?format=jpg&name=medium)
 
 ## Where do we get the data?
 1. Elected officials
