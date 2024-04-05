@@ -5,6 +5,8 @@ create table notes (
 
 insert into notes(title)
 values
-  ('Today I created a Supabase project.'),
-  ('I added some data and queried it from Next.js.'),
-  ('It was awesome!');
+  ('I have an idea for a website'),
+  ('Tell me what you think'),
+  ('WhoShouldIYellAt.com'),
+  ('Put in your zip code and issue you''re mad about - taxes, abortion, zoning reform'),
+  ('You get back - a list of elected officials with that issue under their purview in some way');
