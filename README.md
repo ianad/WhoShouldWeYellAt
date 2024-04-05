@@ -18,7 +18,7 @@ PRs are welcome for components and layouts such as listed below:
 
 1. ZIP Code Text Entry
 2. Policy Gripe Text Entry (or dropdown?)
-3. Submnit Button I guess. There's an Auth Button component from the template we don't really need that we could repurpose
+3. Submit Button I guess. There's an Auth Button component from the template we don't really need that we could repurpose
 
 ## Database Schema
 
