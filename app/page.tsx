@@ -20,7 +20,7 @@ export default async function Index() {
   // const isSupabaseConnected = canInitSupabaseClient();
   const supabase = createClient()
   const { data: notes } = await supabase.from('notes').select()
-
+ 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
@@ -37,6 +37,8 @@ export default async function Index() {
           {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
         </main> */}
       </div>
+      
+      <pre>{JSON.stringify(notes, null, 2)}</pre>
 
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
         <p>
