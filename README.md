@@ -18,7 +18,7 @@ PRs are welcome for components and layouts such as listed below:
 
 1. ZIP Code Text Entry
 2. Policy Gripe Text Entry (or dropdown?)
-
+3. Submnit Button I guess. There's an Auth Button component from the template we don't really need that we could repurpose
 
 ## Database Schema
 
@@ -47,6 +47,3 @@ Public schema
 3. https://github.com/unitedstates/python-us
 4. https://github.com/unitedstates/districts
 5. https://hub.arcgis.com/datasets/d6f7ee6129e241cc9b6f75978e47128b/explore?location=32.505716%2C-96.100453%2C4.37
-
-## Concern points
-1. How do you do this frontend? This repo is NextJS on Vercel.
