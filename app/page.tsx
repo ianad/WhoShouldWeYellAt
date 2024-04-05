@@ -19,7 +19,7 @@ export default async function Index() {
 
   // const isSupabaseConnected = canInitSupabaseClient();
   const supabase = createClient()
-  const { data: notes } = await supabase.from('notes').select()
+  const { data: notes } = await supabase.from('notes').select().order('id', {ascending:false})
  
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
