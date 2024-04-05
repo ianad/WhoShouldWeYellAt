@@ -19,7 +19,7 @@ You get back - a list of elected officials with that issue under their purview i
 		1. text corpus of similar references to common issues
 		2. aliases for each
 
-## Reference links
+## Reference links / utils
 1. https://github.com/unitedstates
 2. https://github.com/unitedstates/congress-legislators
 3. https://github.com/unitedstates/python-us
@@ -27,4 +27,4 @@ You get back - a list of elected officials with that issue under their purview i
 5. https://hub.arcgis.com/datasets/d6f7ee6129e241cc9b6f75978e47128b/explore?location=32.505716%2C-96.100453%2C4.37
 
 ## Concern points
-1. How do you do this frontend?
+1. How do you do this frontend? This repo is NextJS on Vercel.
