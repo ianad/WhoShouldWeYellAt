@@ -49,7 +49,7 @@ export default async function Index() {
         </main> */}
       </div>
         
-      <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+      {/* <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Autocomplete 
         label="Select an animal" 
         className="max-w-xs" 
@@ -68,7 +68,7 @@ export default async function Index() {
       >
         {(item) => <AutocompleteItem key={item}>{item}</AutocompleteItem>}
       </Autocomplete>
-    </div>
+    </div> */}
 
 
 
