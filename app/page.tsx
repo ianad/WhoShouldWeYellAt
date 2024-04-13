@@ -19,7 +19,14 @@ export default async function Index() {
 
   // const isSupabaseConnected = canInitSupabaseClient();
   const supabase = createClient()
-  const { data: notes } = await supabase.from('notes').select().order('id', {ascending:true})
+
+  const {data : issues} = await supabase.from("issues").select("name")
+
+  // const { data: notes } = await supabase.from('legislator_issue').select().order('id', {ascending:true})
+  const { data: legislators } = await supabase.from('legislators').select('full_name, legislator_issue ( issues (name))').eq("full_name", "Jeff Jackson").order('id', {ascending:true})
+ 
+  const animals = issues
+  const display = legislators
  
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -38,7 +45,7 @@ export default async function Index() {
         </main> */}
       </div>
       
-      <pre>{JSON.stringify(notes, null, 2)}</pre>
+      <pre>{JSON.stringify(display, null, 2)}</pre>
 
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
         <p>
