@@ -1,92 +1,44 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
+
+import AutoCompletePage from "./autocomplete-page";
 import Header from "@/components/Header";
-import React from "react";
-import {  Autocomplete,  AutocompleteSection,  AutocompleteItem} from "@nextui-org/react";
-
-
-
 export default async function Index() {
-  // const canInitSupabaseClient = () => {
-  //   // This function is just for the interactive tutorial.
-  //   // Feel free to remove it once you have Supabase connected.
-  //   try {
-  //     createClient();
-  //     return true;
-  //   } catch (e) {
-  //     return false;
-  //   }
-  // };
+  const supabase = createClient();
 
-  // const isSupabaseConnected = canInitSupabaseClient();
-  const supabase = createClient()
-
-  const {data : issues} = await supabase.from("issues").select("name")
-
+  const { data: issues } = await supabase.from("issues").select("name");
   // const { data: notes } = await supabase.from('legislator_issue').select().order('id', {ascending:true})
-  const { data: legislators } = await supabase.from('legislators').select('full_name, legislator_issue ( issues (name))').eq("full_name", "Jeff Jackson").order('id', {ascending:true})
- 
-  const animals = issues
-  const display = legislators
+  // const { data: legislators } = await supabase
+  //   .from("legislators")
+  //   .select("full_name, legislator_issue ( issues (name))")
+  //   .eq("full_name", "Jeff Jackson")
+  //   .order("id", { ascending: true });
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          {/* <DeployButton /> */}
-          {/* {<AuthButton />} */}
+    <div className="w-screen h-screen flex items-center">
+      <div className="w-full flex flex-col items-center">
+        <nav className="w-full flex justify-center h-16">
+          <Header />
+        </nav>
+
+        <div>
+          <div className="py-4">
+            <AutoCompletePage issues={issues} />
+          </div>
         </div>
-      </nav>
-
-      <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
-        <Header />
-        {/* <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-        </main> */}
+        {/* <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
+          <p>
+            Powered by{" "}
+            <a
+              href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+              target="_blank"
+              className="font-bold hover:underline"
+              rel="noreferrer"
+            >
+              Supabase
+            </a>
+          </p>
+        </footer> */}
       </div>
-        
-      {/* <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-      <Autocomplete 
-        label="Select an animal" 
-        className="max-w-xs" 
-      >
-        {animals.map((animal) => (
-          <AutocompleteItem key={animal} value={animal}>
-            {animal}
-          </AutocompleteItem>
-        ))}
-      </Autocomplete>
-      <Autocomplete
-        label="Favorite Animal"
-        placeholder="Search an animal"
-        className="max-w-xs"
-        defaultItems={animals}
-      >
-        {(item) => <AutocompleteItem key={item}>{item}</AutocompleteItem>}
-      </Autocomplete>
-    </div> */}
-
-
-
-      <pre>{JSON.stringify(display, null, 2)}</pre>
-
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          Powered by{" "}
-          <a
-            href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Supabase
-          </a>
-        </p>
-      </footer>
     </div>
   );
 }
