@@ -4,6 +4,10 @@ import { createClient } from "@/utils/supabase/server";
 import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Header from "@/components/Header";
+import React from "react";
+import {  Autocomplete,  AutocompleteSection,  AutocompleteItem} from "@nextui-org/react";
+
+
 
 export default async function Index() {
   // const canInitSupabaseClient = () => {
@@ -27,7 +31,7 @@ export default async function Index() {
  
   const animals = issues
   const display = legislators
- 
+
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
@@ -44,7 +48,30 @@ export default async function Index() {
           {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
         </main> */}
       </div>
-      
+        
+      <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+      <Autocomplete 
+        label="Select an animal" 
+        className="max-w-xs" 
+      >
+        {animals.map((animal) => (
+          <AutocompleteItem key={animal} value={animal}>
+            {animal}
+          </AutocompleteItem>
+        ))}
+      </Autocomplete>
+      <Autocomplete
+        label="Favorite Animal"
+        placeholder="Search an animal"
+        className="max-w-xs"
+        defaultItems={animals}
+      >
+        {(item) => <AutocompleteItem key={item}>{item}</AutocompleteItem>}
+      </Autocomplete>
+    </div>
+
+
+
       <pre>{JSON.stringify(display, null, 2)}</pre>
 
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
