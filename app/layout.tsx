@@ -8,7 +8,8 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Who Should We Yell at?! 😠💢",
-  description: "Find out which elected official you can complain to about your policy gripe",
+  description:
+    "Find out which elected official you can complain to about your policy gripe",
 };
 
 export default function RootLayout({
@@ -18,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
+      <body className="bg-background text-foreground dark">
+        <main className="w-screen h-screen min-h-screen mb-auto flex flex-col items-center">
           {children}
         </main>
       </body>
