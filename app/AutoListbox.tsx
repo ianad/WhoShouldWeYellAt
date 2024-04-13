@@ -3,20 +3,24 @@ import React from "react";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 
 export default function AutoListbox(
-  { issues }: { issues: { name: string }[] | null },
+  { data, indefiniteArticle, topic }: {
+    data: { name: string }[] | null;
+    indefiniteArticle: string;
+    topic: string;
+  },
 ) {
   return (
-    issues
+    data
       ? (
         <>
           <Autocomplete
-            defaultItems={issues}
-            label="Pick an Issue"
-            placeholder="Search for an issue"
+            defaultItems={data}
+            label={`Pick ${indefiniteArticle} ${topic}`}
+            placeholder={`Search for ${indefiniteArticle} ${topic}`}
             className="max-w-xs"
           >
-            {(issue) => (
-              <AutocompleteItem key={issue.name}>{issue.name}</AutocompleteItem>
+            {(datum) => (
+              <AutocompleteItem key={datum.name}>{datum.name}</AutocompleteItem>
             )}
           </Autocomplete>
         </>
