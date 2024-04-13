@@ -8,7 +8,7 @@ import React from "react";
 
 // import Header from "@/components/Header";
 
-export default function AutoCompletePage({ issues }: { any }) {
+export default function AutoCompletePage({ issues }) {
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Autocomplete
