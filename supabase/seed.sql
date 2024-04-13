@@ -3,4 +3,7 @@ public.issues (name)
 values
 ('abortion'),
 ('drug prices'),
-('climate change')
+('climate change'),
+('zoning'),
+('taxes'),
+('housing')
