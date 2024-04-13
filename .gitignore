@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+# svelte
+.svelte-kit/
+
 # next.js
 /.next/
 /out/
