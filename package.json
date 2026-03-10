@@ -4,7 +4,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "seed:legislators": "tsx scripts/seed-legislators.ts"
+    "seed:legislators": "tsx scripts/seed-legislators.ts",
+    "seed:committees": "tsx scripts/seed-committees.ts",
+    "seed:committee-issues": "psql postgresql://postgres:postgres@127.0.0.1:54322/postgres -f scripts/seed-committee-issues.sql",
+    "seed": "npm run seed:legislators && npm run seed:committees && npm run seed:committee-issues"
   },
   "dependencies": {
     "@heroui/react": "^2.8.10",

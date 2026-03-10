@@ -37,16 +37,41 @@ export default function AutoListbox({
     setLoading(true);
 
     const supabase = createClient();
-    const { data: results } = await supabase
-      .from("legislator_issue")
-      .select("legislators (full_name, party, state, type, phone, contact_form), issues!inner (name)")
-      .eq("issues.name", issueName);
 
-    const legs: Legislator[] = (results ?? [])
+    // Fetch from both paths: direct legislator_issue and via committees
+    const [directResult, committeeResult] = await Promise.all([
+      supabase
+        .from("legislator_issue")
+        .select("legislators (full_name, party, state, type, phone, contact_form), issues!inner (name)")
+        .eq("issues.name", issueName),
+      supabase
+        .from("committee_issue")
+        .select("committees!inner (legislator_committee (legislators (full_name, party, state, type, phone, contact_form))), issues!inner (name)")
+        .eq("issues.name", issueName),
+    ]);
+
+    const directLegs: Legislator[] = (directResult.data ?? [])
       .map((r: any) => r.legislators)
       .filter(Boolean);
 
-    setLegislators(legs);
+    const committeeLegs: Legislator[] = (committeeResult.data ?? [])
+      .flatMap((r: any) =>
+        (r.committees?.legislator_committee ?? []).map((lc: any) => lc.legislators)
+      )
+      .filter(Boolean);
+
+    // Deduplicate by full_name
+    const seen = new Set<string>();
+    const allLegs: Legislator[] = [];
+    for (const leg of [...directLegs, ...committeeLegs]) {
+      const key = leg.full_name ?? "";
+      if (!seen.has(key)) {
+        seen.add(key);
+        allLegs.push(leg);
+      }
+    }
+
+    setLegislators(allLegs);
     setLoading(false);
   }
 

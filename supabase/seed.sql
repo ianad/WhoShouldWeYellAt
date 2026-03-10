@@ -6,4 +6,7 @@ values
 ('climate change'),
 ('zoning'),
 ('taxes'),
-('housing')
+('housing');
+
+-- Committee-issue mappings (populated after running seed:committees)
+-- These are inserted by scripts/seed-committee-issues.sql or manually after committees exist
