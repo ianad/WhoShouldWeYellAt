@@ -4,7 +4,7 @@ import Header from "./Header";
 import AutoListbox from "./AutoListbox";
 
 export default async function Index() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data: issues } = await supabase.from("issues").select("name");
   // const { data: notes } = await supabase.from('legislator_issue').select().order('id', {ascending:true})
