@@ -19,6 +19,8 @@ supabase db reset # Reset local DB and re-run migrations + seed.sql
 
 No test framework is configured. `npm run build` is the primary CI check.
 
+**Important:** Do NOT run `npm run build` while the dev server is running. They share the `.next` directory and will corrupt each other, causing `MODULE_NOT_FOUND` errors. The dev server does type-checking on the fly, so trust it during development. Only run `build` after stopping the dev server.
+
 ## Architecture
 
 **Next.js 15 + React 19 app** with Supabase backend, deployed on Vercel. Uses HeroUI (formerly NextUI) component library with Tailwind CSS (dark mode by default).
