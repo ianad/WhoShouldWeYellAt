@@ -15,7 +15,7 @@ export default async function Index() {
       <div className="mt-4 shrink gap-4">
         <Header />
       </div>
-      <div className="shrink-0 mt-12 mb-16">
+      <div className="shrink-0 mt-12 mb-16 w-full max-w-4xl px-4">
         <AutoListbox data={issues} indefiniteArticle="an" topic="Issue" />
       </div>
 
