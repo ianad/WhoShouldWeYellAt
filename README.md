@@ -1,4 +1,4 @@
-# WhoShouldWeYellAt
+# Who Should We Yell At?!
 
 [!["I have an idea for a website
 Tell me what you think
@@ -7,44 +7,64 @@ Put in your zip code and issue you're mad about - taxes, abortion, zoning reform
 You get back - a list of elected officials with that issue under their purview in some way
 "](https://pbs.twimg.com/media/GKVh3bsWoAATqWz?format=jpg&name=medium)](https://twitter.com/emiliepfrank/status/1775933238592319953)
 
-## Contributing
-The website frontend is written in TypeScript and deployed with Next.js/Vercel. 
+A civic tool that helps people find which elected officials to contact about specific policy issues. Enter your ZIP code and pick an issue you care about — get back your senators and representatives, with the ones on relevant committees highlighted.
 
-Right now there is one main page showing dummy records from the Supabase Postgres database. This page is located at `app/page.tsx`.
+## Getting Started
 
-PRs are welcome for components and layouts such as listed below:
+```bash
+npm install
+npm run dev          # Start dev server at localhost:3000
+```
 
-### Components we need
+Requires a Supabase instance (local or hosted) with environment variables:
 
-There's a set of components on the `app/login/page.tsx` page from the template we don't really need that we could repurpose
-1. ZIP Code Text Entry (repurpose from username/password entry field) 
-2. Policy Gripe Text Entry (or dropdown?)
-3. Submit Button (repurpose from login submit button)
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+### Local Supabase
+
+```bash
+supabase start       # Postgres on :54322, Studio on :54323, API on :54321
+supabase db reset    # Reset DB and run migrations + seed.sql
+npm run seed         # Seed legislators, committees, issues, and ZIP-to-district data
+```
+
+Individual seed scripts:
+
+```bash
+npm run seed:legislators        # From unitedstates/congress-legislators YAML
+npm run seed:committees         # Committees + memberships from same source
+npm run seed:committee-issues   # Map committees to policy issues (SQL)
+npm run seed:zip-districts      # ZIP-to-congressional-district from OpenSourceActivismTech
+```
+
+## How It Works
+
+1. User enters their ZIP code
+2. App looks up congressional districts for that ZIP
+3. User picks a policy issue (81 topics from taxes to cybersecurity)
+4. App shows their senators and representatives, grouped by chamber and district
+5. Legislators on committees relevant to the selected issue are highlighted with their committee names
+
+## Tech Stack
+
+- **Next.js 15 + React 19** — App Router with Server and Client Components
+- **Supabase** — Postgres database with Row Level Security
+- **HeroUI** — UI component library (formerly NextUI)
+- **Tailwind CSS** — Styling (dark mode)
+- **Vercel** — Deployment
 
 ## Database Schema
 
-### Tables
-Public schema
-1. Officials
-2. Issues
-3. Precincts
-4. Notes
+- `legislators` — Elected officials with contact info and external IDs (bioguide, govtrack, etc.)
+- `issues` — Policy topics (81 issues across 15+ categories)
+- `committees` — Congressional committees identified by thomas_id
+- `legislator_committee` — Which legislators sit on which committees
+- `committee_issue` — Which committees handle which issues
+- `legislator_issue` — Direct legislator-to-issue links (for cases outside committee structure)
+- `zip_districts` — ZIP code to congressional district mapping
 
-## Where do we get the data?
-1. Elected officials
-	1. precinct
-	2. zip code
-	3. office responsibilities
-	4. campaign messaging
-2. Issues
-	1. taxes, abortion, zoning reform, etc.
-	2. wording heterogeneity
-		1. text corpus of similar references to common issues
-		2. aliases for each
+## Data Sources
 
-## Reference links / utils
-1. https://github.com/unitedstates
-2. https://github.com/unitedstates/congress-legislators
-3. https://github.com/unitedstates/python-us
-4. https://github.com/unitedstates/districts
-5. https://hub.arcgis.com/datasets/d6f7ee6129e241cc9b6f75978e47128b/explore?location=32.505716%2C-96.100453%2C4.37
+- [unitedstates/congress-legislators](https://github.com/unitedstates/congress-legislators) — Legislator bios, terms, contact info, committee memberships
+- [OpenSourceActivismTech/us-zipcodes-congress](https://github.com/OpenSourceActivismTech/us-zipcodes-congress) — ZIP-to-congressional-district mapping
