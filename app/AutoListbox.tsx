@@ -11,6 +11,7 @@ type Legislator = {
   district: string | null;
   phone: string | null;
   contact_form: string | null;
+  url: string | null;
 };
 
 type ZipDistrict = {
@@ -51,14 +52,14 @@ function LegislatorCard({
       {leg.phone && (
         <div className="text-sm text-gray-400">{leg.phone}</div>
       )}
-      {leg.contact_form && (
+      {(leg.contact_form || leg.url) && (
         <a
-          href={leg.contact_form}
+          href={(leg.contact_form || leg.url)!}
           target="_blank"
           rel="noreferrer"
           className="text-sm text-blue-400 hover:underline"
         >
-          Contact form
+          {leg.contact_form ? "Contact form" : "Official website"}
         </a>
       )}
     </li>
@@ -106,7 +107,7 @@ export default function AutoListbox({
       // Fetch all legislators for the state(s)
       const { data: stateLegislators } = await supabase
         .from("legislators")
-        .select("full_name, party, state, type, district, phone, contact_form")
+        .select("full_name, party, state, type, district, phone, contact_form, url")
         .in("state", states);
 
       // Filter to senators + matching district reps
